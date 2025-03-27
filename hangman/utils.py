@@ -4,16 +4,13 @@ from .constants import BLUE, GRAPHICS, GREEN, GREY, LINE_WIDTH, RED, WHITE, WIND
 
 
 def draw_base(screen, margin_x=10, margin_y=50):
-    """Dibuja el ahorcado completo deactivado."""
+    """Dibuja el ahorcado completo desactivado."""
     for key in GRAPHICS:
         draw_part(screen, key, False, margin_x, margin_y)
 
 
-def offset_point(point, margin_x, margin_y):
-    return (point[0] + margin_x, point[1] + margin_y)
-
-
 def draw_part(screen, key, active=False, margin_x=10, margin_y=50):
+    """Dibuja una parte solamente (activo en azul)"""
     color = GREY
     if active:
         color = BLUE
@@ -28,13 +25,15 @@ def draw_part(screen, key, active=False, margin_x=10, margin_y=50):
 
 
 def draw_word(screen, font, word):
+    """Dibuja la palabra del juego"""
     word_surface = font.render(word, True, WHITE)
     word_width, word_height = word_surface.get_size()
     screen.blit(word_surface, ((WINDOW_W-word_width) //
                 2, WINDOW_H-word_height*1.5))
 
 
-def draw_letters(screen, font: pg.font.SysFont, x, y, fail='', success=''):
+def draw_letters(screen, font, x, y, fail='', success=''):
+    """Dibuja el abecedario. fail: letras erróneas, success: letras acertadas"""
     a = ord('A')
     z = ord('Z')
     n = ord('N')
@@ -55,6 +54,12 @@ def draw_letters(screen, font: pg.font.SysFont, x, y, fail='', success=''):
         if ascii == n:
             pos_x, pos_y = draw_letter(
                 screen, font, x, char_width, line_height, pos_x, pos_y, nn, color)
+
+########################################################
+
+
+def offset_point(point, margin_x, margin_y):
+    return (point[0] + margin_x, point[1] + margin_y)
 
 
 def draw_letter(screen, font, x, char_width, line_height, pos_x, pos_y, ascii, color):

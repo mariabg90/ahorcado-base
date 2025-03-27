@@ -1,6 +1,6 @@
 import pygame as pg
 from hangman import utils
-from hangman.constants import BLACK, BLUE, GRAPHICS, GREY, LINE_WIDTH, WHITE, WINDOW_H, WINDOW_W
+from hangman.constants import GRAPHICS, WINDOW_H, WINDOW_W
 
 pg.init()
 display = pg.display.set_mode((WINDOW_W, WINDOW_H), 0, 32)
@@ -25,6 +25,8 @@ while playing:
 
     if counter % 20 == 0:
         status += 1
+    if counter > 220:
+        counter = 0
 
     for index, key in enumerate(GRAPHICS):
         if index <= status:
