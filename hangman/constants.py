@@ -1,4 +1,34 @@
+""""
+Este módulo define constantes utilizadas en el juego del ahorcado.
+
+Constantes:
+    BLACK (tuple): Color RGB para negro.
+    GREY (tuple): Color RGB para gris.
+    WHITE (tuple): Color RGB para blanco.
+    RED (tuple): Color RGB para rojo.
+    GREEN (tuple): Color RGB para verde.
+    BLUE (tuple): Color RGB para azul.
+
+    LINE_WIDTH (int): Ancho de las líneas utilizadas en los gráficos.
+
+    WINDOW_W (int): Ancho de la ventana del juego.
+    WINDOW_H (int): Altura de la ventana del juego.
+
+    GRAPHICS (dict): Diccionario que contiene los elementos gráficos del ahorcado.
+        - 'baseline': Coordenadas para la base de la estructura del ahorcado.
+        - 'stick1': Coordenadas para el palo vertical de la estructura del ahorcado.
+        - 'stick2': Coordenadas para el palo horizontal de la estructura del ahorcado.
+        - 'rope': Coordenadas para la cuerda.
+        - 'head': Coordenadas y radio para la cabeza del ahorcado.
+        - 'body': Coordenadas para el cuerpo del ahorcado.
+        - 'lefthand': Coordenadas para la mano izquierda del ahorcado.
+        - 'righthand': Coordenadas para la mano derecha del ahorcado.
+        - 'leftleg': Coordenadas para la pierna izquierda del ahorcado.
+        - 'rightleg': Coordenadas para la pierna derecha del ahorcado."
+"""
+
 BLACK = (0, 0, 0)
+
 GREY = (50, 50, 50)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
