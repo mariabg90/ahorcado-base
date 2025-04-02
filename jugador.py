@@ -1,3 +1,5 @@
+import unicodedata
+
 from hangman import utils
 from hangman.constants import WINDOW_H, WINDOW_W
 
@@ -15,6 +17,12 @@ class Jugador:
         self.letras_correctas = set()
         self.letras_incorrectas = set()
         self.ganado = True
+    
+    def quitar_acentos(self, texto):
+        texto = unicodedata.normalize('NFD', texto)
+        texto = ''.join([c for c in texto if unicodedata.category(c) != 'Mn'])
+        return unicodedata.normalize('NFC', texto)
+
 
     def intentar_letra(self, letra, palabra_secreta):
         """
@@ -26,15 +34,17 @@ class Jugador:
         4. Si la letra esta en la palabra secreta se anade al conjunto de letras correctas
         5. Si no, se anade al conjuto de letras incorrectas
         """
-        letra = letra.lower()
-        if letra not in self.letras_intentadas and letra.isalpha():
-            # no ha intentado esa letra, se anade a la lista de letras intentadas
-            self.letras_intentadas.add(letra)
-            if letra in palabra_secreta:
-                self.letras_correctas.add(letra)
-                return True # devuelve True si la letra es correcta
-            else: 
-                self.letras_incorrectas.add(letra)
+        letra_normalizada = self.quitar_acentos(letra).lower()
+        if letra_normalizada not in [self.quitar_acentos(l).lower() for l in self.letras_intentadas] and letra.isalpha():
+            self.letras_intentadas.add(letra_normalizada)
+            es_correcta = False
+            for letra_secreta in palabra_secreta:
+                letra_secreta_normalizada = self.quitar_acentos(letra_secreta).lower()
+                if letra_secreta_normalizada == letra_normalizada:
+                    self.letras_correctas.add(letra_normalizada)
+                    es_correcta = True
+                    break # Importante: Si encontramos una coincidencia, podemos salir del bucle
+            return es_correcta
         return False # ya ha intentado la letra
 
     def obtener_letras_correctas(self):
