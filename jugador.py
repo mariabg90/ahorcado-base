@@ -15,7 +15,7 @@ class Jugador:
     def intentar_letra(self, letra, palabra_secreta):
         """
         1. Convertimos la letra introducida en minuscula
-            - TODO: que ignore tildes y dieresis
+            - TODO: que ignore tildes y dieresis (creo que ya lo hace con lo de ascii)
         2. Comprobamos is ya se ha intentado esa letra ys e anade al conjunto de letras intentadas
         3. Comprobamos si la letra introducida esta en la palabra secreta
         4. Si la letra esta en la palabra secreta se anade al conjunto de letras correctas
@@ -31,3 +31,8 @@ class Jugador:
                 self.letras_incorrectas.add(letra)
         return False # ya ha intentado la letra
 
+    def obtener_letras_correctas(self):
+        return self.letras_correctas
+
+    def obtener_letras_incorrectas(self):
+        return self.letras_incorrectas

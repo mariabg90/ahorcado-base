@@ -16,7 +16,8 @@ letters_font = pg.font.SysFont(font_name, 60)
 # tengo acceso a los datos y funciones que he definido en mis clases:
 palabras_juego = Palabras()
 jugador = Jugador()
-
+palabra_secreta = palabras_juego.seleccionar_palabra()
+print(f'La palabra secreta es {palabra_secreta}')
 
 counter = 0
 status = -1
@@ -36,7 +37,9 @@ while playing:
             # verificar si lo que se ha pulsado es una letra
             if event.unicode.isalpha(): 
                 letra_intentada = event.unicode
-                jugador.intentar_letra(letra_intentada)
+
+                # pasamos la letra intentada y la palabra secreta al metodo intentar letra del objeto jugador
+                jugador.intentar_letra(letra_intentada, palabra_secreta)
                 print(f'Letras intentadas{jugador.letras_intentadas}')
 
     # dibuja el ahorcado completo desactivado
@@ -56,8 +59,11 @@ while playing:
     # dibuja una palabra de prueba a medio adivinar
     utils.draw_word(display, font, palabras_juego.crear_palabra_oculta())
 
+    letras_correctas = jugador.obtener_letras_correctas()
+    letras_incorrectas = jugador.obtener_letras_incorrectas()
+
     # dibuja el abecedario con algunas letras probadas
     # erróneas y otras letras válidas
-    utils.draw_letters(display, letters_font, 360, 50, 'amu', 'ed')
+    utils.draw_letters(display, letters_font, 360, 50, ''.join(sorted(letras_incorrectas)), ''.join(sorted(letras_correctas)))
 
     pg.display.flip()
