@@ -11,7 +11,7 @@ class Palabras:
 
     # elijo una palabra al azar de mi lista
     def seleccionar_palabra(self):
-       self.palabra_secreta = choice(palabras_comunes)
+       self.palabra_secreta = choice(self.palabras)
        return self.palabra_secreta # devuelve la palabra secreta en su forma original
        
     # creo la palabra oculta con guiones para el jugador

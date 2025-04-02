@@ -37,7 +37,7 @@ while playing:
             if event.unicode.isalpha(): 
                 letra_intentada = event.unicode
                 jugador.intentar_letra(letra_intentada)
-                
+                print(f'Letras intentadas{jugador.letras_intentadas}')
 
     # dibuja el ahorcado completo desactivado
     utils.draw_base(display, 30)

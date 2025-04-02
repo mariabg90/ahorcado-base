@@ -9,11 +9,25 @@ class Jugador:
 
     def __init__(self):
         self.letras_intentadas = set() # conjunto de letras intentadas
+        self.letras_correctas = set()
+        self.letras_incorrectas = set()
 
-    def intentar_letra(self, letra):
+    def intentar_letra(self, letra, palabra_secreta):
+        """
+        1. Convertimos la letra introducida en minuscula
+            - TODO: que ignore tildes y dieresis
+        2. Comprobamos is ya se ha intentado esa letra ys e anade al conjunto de letras intentadas
+        3. Comprobamos si la letra introducida esta en la palabra secreta
+        4. Si la letra esta en la palabra secreta se anade al conjunto de letras correctas
+        5. Si no, se anade al conjuto de letras incorrectas
+        """
         letra = letra.lower()
         if letra not in self.letras_intentadas and letra.isalpha():
+            # no ha intentado esa letra, se anade a la lista de letras intentadas
             self.letras_intentadas.add(letra)
-            return True # no ha intentado esa letra, se anade a la lista de letras intentadas
+            if letra in palabra_secreta:
+                self.letras_correctas.add(letra)
+            else: 
+                self.letras_incorrectas.add(letra)
         return False # ya ha intentado la letra
 
