@@ -37,12 +37,20 @@ class Palabras:
 
 
     def actualizar_palabra_oculta(self, letra_intentada):
-        letra_intentada = letra_intentada.lower()
+        letra_intentada = letra_intentada.lower() # las palabras de la lista estan en minuscula
         for i, letra_secreta in enumerate(self.palabra_secreta):
             if letra_secreta == letra_intentada:
                 self.palabra_oculta[i] = letra_intentada
         # devolvemos la palabra oculta actualizada
         return self.palabra_oculta
+    
+    def palabra_adivinada(self):
+        """
+        Comprobamos si la palabra oculta ya no contiene guiones bajos
+        """
+        if '_' not in self.palabra_oculta:
+            return True # la palabra ha sido adivinada
+    
         
 
     

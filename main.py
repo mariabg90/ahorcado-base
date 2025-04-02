@@ -25,6 +25,7 @@ counter = 0
 status = -1
 playing = True
 fallos = 0
+ganado = False
 
 # bucle principal
 while playing:
@@ -49,6 +50,8 @@ while playing:
                 # Deteccion de letras correctas
                 if resultado_intento == True:
                     palabra_oculta_actualizada = palabras_juego.actualizar_palabra_oculta(letra_intentada)
+                    if palabras_juego.palabra_adivinada():
+                        ganado = True
                 elif resultado_intento == False: # la letra es incorrecta
                     fallos += 1
 
@@ -69,11 +72,17 @@ while playing:
     # dibuja una palabra que se esta adivinando
     utils.draw_word(display, font, ' '.join(palabra_oculta_actualizada))
 
-    letras_correctas = jugador.obtener_letras_correctas()
-    letras_incorrectas = jugador.obtener_letras_incorrectas()
+    # Mostramos mensaje de victoria si el jugador ha ganado:
+    if ganado == True:
+        win_text = font.render("¡Has Ganado!", True, (0, 255, 0))
+        win_rect = win_text.get_rect(center=(WINDOW_W // 2, WINDOW_H // 2))
+        display.blit(win_text, win_rect)
+    else:
+        letras_correctas = jugador.obtener_letras_correctas()
+        letras_incorrectas = jugador.obtener_letras_incorrectas()
 
-    # dibuja el abecedario con algunas letras probadas
-    # erróneas y otras letras válidas
-    utils.draw_letters(display, letters_font, 360, 50, ''.join(sorted(letras_incorrectas)), ''.join(sorted(letras_correctas)))
+        # dibuja el abecedario con algunas letras probadas
+        # erróneas y otras letras válidas
+        utils.draw_letters(display, letters_font, 360, 50, ''.join(sorted(letras_incorrectas)), ''.join(sorted(letras_correctas)))
 
     pg.display.flip()
