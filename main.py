@@ -1,5 +1,6 @@
 import pygame as pg
 from hangman import utils
+
 from hangman.constants import GRAPHICS, WINDOW_H, WINDOW_W
 from jugador import Jugador
 from palabras import Palabras
@@ -23,12 +24,14 @@ palabra_oculta_actualizada = palabras_juego.crear_palabra_oculta() # Inicializam
 counter = 0
 status = -1
 playing = True
+fallos = 0
 
 # bucle principal
 while playing:
     clock.tick(20)
     counter += 1
     display.fill((0, 0, 0))  # Esto limpia la pantalla con un fondo negro antes de redibujar
+
     # evento para salir al cerrar la ventana
     for event in pg.event.get():
         if event.type == pg.QUIT:
@@ -46,19 +49,21 @@ while playing:
                 # Deteccion de letras correctas
                 if resultado_intento == True:
                     palabra_oculta_actualizada = palabras_juego.actualizar_palabra_oculta(letra_intentada)
+                elif resultado_intento == False: # la letra es incorrecta
+                    fallos += 1
 
     # dibuja el ahorcado completo desactivado
     utils.draw_base(display, 30)
 
     # cada segundo activa una parte del ahorcado
     # simulando la evolución del juego
-    if counter % 20 == 0:
-        status += 1
-    if counter > 220:
-        status = -1
+    # if counter % 20 == 0:
+    #     status += 1
+    # if counter > 220:
+    #     status = -1
 
     for index, key in enumerate(GRAPHICS):
-        if index <= status:
+        if index < fallos:
             utils.draw_part(display, key, True, 30)
 
     # dibuja una palabra que se esta adivinando

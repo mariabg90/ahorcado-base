@@ -12,6 +12,7 @@ class Jugador:
         self.letras_correctas = set()
         self.letras_incorrectas = set()
 
+   
     def intentar_letra(self, letra, palabra_secreta):
         """
         Devuelve True o False
@@ -38,3 +39,7 @@ class Jugador:
 
     def obtener_letras_incorrectas(self):
         return self.letras_incorrectas
+    
+
+    
+
