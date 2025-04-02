@@ -44,6 +44,8 @@ class Jugador:
                     self.letras_correctas.add(letra_normalizada)
                     es_correcta = True
                     break # Importante: Si encontramos una coincidencia, podemos salir del bucle
+            if not es_correcta:
+                self.letras_incorrectas.add(letra_normalizada)
             return es_correcta
         return False # ya ha intentado la letra
 
