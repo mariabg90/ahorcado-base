@@ -1,3 +1,6 @@
+from hangman import utils
+from hangman.constants import WINDOW_H, WINDOW_W
+
 class Jugador:
     """
     - Creamos un atributo llamado letras_intentadas
@@ -11,6 +14,7 @@ class Jugador:
         self.letras_intentadas = set() # conjunto de letras intentadas
         self.letras_correctas = set()
         self.letras_incorrectas = set()
+        self.ganado = True
 
     def intentar_letra(self, letra, palabra_secreta):
         """
@@ -38,7 +42,8 @@ class Jugador:
 
     def obtener_letras_incorrectas(self):
         return self.letras_incorrectas
-    
-
-    
-
+       
+    def mostrar_resultado(self, display, font):
+            win_text = font.render("¡Has Ganado!", True, (0, 255, 0))
+            win_rect = win_text.get_rect(center=(WINDOW_W // 2, WINDOW_H // 2))
+            display.blit(win_text, win_rect)

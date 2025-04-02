@@ -1,6 +1,6 @@
 import pygame as pg
-from hangman import utils
 
+from hangman import utils
 from hangman.constants import GRAPHICS, WINDOW_H, WINDOW_W
 from jugador import Jugador
 from palabras import Palabras
@@ -73,16 +73,11 @@ while playing:
     utils.draw_word(display, font, ' '.join(palabra_oculta_actualizada))
 
     # Mostramos mensaje de victoria si el jugador ha ganado:
-    if ganado == True:
-        win_text = font.render("¡Has Ganado!", True, (0, 255, 0))
-        win_rect = win_text.get_rect(center=(WINDOW_W // 2, WINDOW_H // 2))
-        display.blit(win_text, win_rect)
+    if ganado:
+        jugador.mostrar_resultado(display, font)
     else:
-        letras_correctas = jugador.obtener_letras_correctas()
-        letras_incorrectas = jugador.obtener_letras_incorrectas()
-
         # dibuja el abecedario con algunas letras probadas
         # erróneas y otras letras válidas
-        utils.draw_letters(display, letters_font, 360, 50, ''.join(sorted(letras_incorrectas)), ''.join(sorted(letras_correctas)))
-
+        utils.draw_letters(display, letters_font, 360, 50, ''.join(sorted(jugador.obtener_letras_incorrectas())), ''.join(sorted(jugador.obtener_letras_correctas())))
+    
     pg.display.flip()
